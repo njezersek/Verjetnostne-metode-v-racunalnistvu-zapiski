@@ -7,9 +7,45 @@
 \setlength{\multicolsep}{1pt}
 \setlength{\columnsep}{2pt}
 
-\section{Uporabne formule}
+\section{TODO}
+\begin{itemize}
+	\item Znani problemi (max/min cut, perfect matching, quicksort, ...)
+	\item Porazdelitve
+\end{itemize}
 
-\[ H_n = \sum_{k=1}^n \frac{1}{k}\; \leq \; 1 + O(log n)\]
+\section{Uporabne formule}
+\[ H_n = \sum_{k=1}^n \frac{1}{k}\; \leq \; 1 + O(\log n)\]
+
+\[
+    \begin{aligned}
+        \sum_{n=0}^{\infty} q^n &= \frac{1}{1-q} &
+        \sum_{n=0}^{b} q^n &= \frac{1-q^{b+1}}{1-q}
+        \\
+        \sum_{n=a}^{\infty} q^n &= \frac{q^{a}}{1-q} &
+        \sum_{n=a}^{b} q^n &= \frac{q^a-q^{b+1}}{1-q}
+    \end{aligned}
+\]
+
+\[
+    a^n - b^n = (a-b)(a^{n-1} + a^{n-2}b + ... + ab^{n-2} + b^{n-1})  
+\]
+\[ (x+y)^n = \sum_{k=0}^{n} \binom{n}{k} x^{n-k}y^{k} \]
+\[ \frac{1}{(1-x)^n} = \sum_{k=0}^{n} \binom{n+k-1}{k} x^{k} \]
+
+\[\binom{n}{k} = \frac{n^{\underline{k}}}{k!} = \frac{n!}{k!(n-k)!} = \binom{n}{n-k}\]
+
+\subsubsection{Izbori}
+Imamo $n$ oštevilčenih kroglic. Na koliko načinov lahko izberemo $k$ kroglic?
+
+\begin{center}
+    \begin{tabular}{ m{6em} | c | c | } 
+         & \textbf{s pon.} & \textbf{brez pon.}\\ 
+        \hline
+        \textbf{variacije} \emph{vrstni red je pomemben} & $n^k$ & $n^{\underline{k}}$ \\ 
+        \hline
+        \textbf{kombinacije} \emph{vrstni red ni pomemben} & $\binom{n+k-1}{k}$ & $\binom{n}{k}$ \\ 
+    \end{tabular}
+\end{center}
 
 \section{Verjetnostni algoritmi za odločitvene probleme}
 Odgovarjamo na vprašanje $\omega \in \Pi$? \\
@@ -122,8 +158,14 @@ Sl. sprem. $X$ in $Y$ sta nekorelirani, če velja:
 
 
 \subsection{Neenakost Markova}
-Če je $X$ sl. sprem. z mat. up., potem je
+Če je $X$ ne negativna sl. sprem. z mat. up., potem je
 \[P(|X| \geq a) \leq \frac{E(|X|)}{a} \quad \forall a > 0\]
+
+\subsection{Neenakost Čebiševa}
+Če ima $X$ disperzijo, je
+\[ P(|X - E(X)| \geq a \sigma(X)) \leq \frac{1}{a^2}  \quad \forall a > 0\]
+oziroma za $\varepsilon := a \sigma(X)$
+\[ P(|X-E(X)| \geq \varepsilon) \leq \frac{D(X)}{\varepsilon^2}\]
 
 \end{multicols}
 \end{document}
