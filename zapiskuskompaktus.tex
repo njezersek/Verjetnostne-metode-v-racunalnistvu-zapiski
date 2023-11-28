@@ -10,7 +10,6 @@
 \section{TODO}
 \begin{itemize}
 	\item Znani problemi (max/min cut, perfect matching, quicksort, ...)
-	\item Porazdelitve
 \end{itemize}
 
 \section{Uporabne formule}
@@ -71,7 +70,7 @@ Odgovarjamo na vprašanje $\omega \in \Pi$? \\
 
 $\text{ZPP} = \text{RP} \cap \text{co-RP}$,\ \ $\text{P} \subset \text{ZPP}$,\ \ $\text{RP} \cup \text{co-RP} \subset \text{BPP}$
 
-\section{Chernoff bound}
+\section{Neenakost Černoffa}
 $X_1, \dots, X_n$ neodvisne slučajne spremenljivke, $X_i \in \{0, 1\}$, $X = \sum_{i=1}^n X_i$, $\mu = E(X)$. Potem za vsak $\delta \in (0,1)$ velja:
 
 \begin{align*}
@@ -166,6 +165,7 @@ Sl. sprem. $X$ in $Y$ sta nekorelirani, če velja:
 \[ P(|X - E(X)| \geq a \sigma(X)) \leq \frac{1}{a^2}  \quad \forall a > 0\]
 oziroma za $\varepsilon := a \sigma(X)$
 \[ P(|X-E(X)| \geq \varepsilon) \leq \frac{D(X)}{\varepsilon^2}\]
-
 \end{multicols}
+
+\includepdf[pages={1}]{Porazd.pdf}
 \end{document}
