@@ -74,8 +74,8 @@ $\text{ZPP} = \text{RP} \cap \text{co-RP}$,\ \ $\text{P} \subset \text{ZPP}$,\ \
 $X_1, \dots, X_n$ neodvisne slučajne spremenljivke, $X_i \in \{0, 1\}$, $X = \sum_{i=1}^n X_i$, $\mu = E(X)$. Potem za vsak $\delta \in (0,1)$ velja:
 
 \begin{align*}
-	P(X - \mu \geq \delta \mu) &\leq e^{-\frac{\delta^2 \mu}{3}} \\
-	P(\mu - X \geq \delta \mu) &\leq e^{-\frac{\delta^2 \mu}{2}} \\
+	P(X - \mu \geq \delta \mu) &\leq e^{-\frac{\delta^2 \mu}{2+\delta}} \leq e^{-\frac{\delta^2 \mu}{3}} \\
+	P(\mu - X \geq \delta \mu) &\leq e^{-\frac{\delta^2 \mu}{2}} \leq e^{-\frac{\delta^2 \mu}{3}} \\
 	P(|X - \mu| \geq \delta \mu) &\leq 2e^{-\frac{\delta^2 \mu}{3}} \\
 \end{align*}
 
