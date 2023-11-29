@@ -76,7 +76,7 @@
         basicstyle=\scriptsize, 
 		columns=flexible,
         keywordstyle=\bfseries\em,
-        keywords={,vhod, izhod, zacetek, konec, koncamo, ponavljaj, dokler, ce, vrni, za, vsak, vse, v, sicer,} %add the keywords you want, or load a language as Rubens explains in his comment above.
+        keywords={,vhod, izhod, zacetek, konec, koncamo, ponavljaj, dokler, ce, vrni, za, vsak, vse, v, sicer, alg, def} %add the keywords you want, or load a language as Rubens explains in his comment above.
         xleftmargin=.1\textwidth,
 		tabsize=4,
 		%frame=leftline,xleftmargin=5pt,xrightmargin=5pt,framesep=5pt,
@@ -95,11 +95,6 @@
 \setlength{\postmulticols}{1pt}
 \setlength{\multicolsep}{1pt}
 \setlength{\columnsep}{2pt}
-
-\section{TODO}
-\begin{itemize}
-	\item Znani problemi (max/min cut, perfect matching, quicksort, ...)
-\end{itemize}
 
 \section{Uporabne formule}
 \[ H_n = \sum_{k=1}^n \frac{1}{k}\; \leq \; 1 + O(\log n)\]
@@ -121,6 +116,8 @@
 \[ \frac{1}{(1-x)^n} = \sum_{k=0}^{n} \binom{n+k-1}{k} x^{k} \]
 
 \[\binom{n}{k} = \frac{n^{\underline{k}}}{k!} = \frac{n!}{k!(n-k)!} = \binom{n}{n-k}\]
+
+\[P(A|B) = \frac{P(A\cap B)}{P(B)} \qquad P(A|B) = \frac{P(B|A)P(A)}{P(B)}\]
 
 \subsubsection{Izbori}
 Imamo $n$ oštevilčenih kroglic. Na koliko načinov lahko izberemo $k$ kroglic?
@@ -180,6 +177,27 @@ in $Y$ je $(\epsilon, \delta)$-aproksimacija za $\mu$.
 
 \section{Polinomi}
 Naj bo $\mathbb{F}$ polje. Stopnja polinoma $p \in \mathbb{F}[x_1, \dots, x_n]$ je $\deg(p(x_1, \dots, x_n)) = \deg(p(x, \dots, x))$
+
+\subsubsection{Predstavitev s polinomi}
+
+\begin{align*}
+    \text{\tiny terka} && T = (a_0, \dots, a_n) &\ \mapsto \ p_T(x) = \sum_{i=0}^n a_i x^i \\
+    \text{\tiny terka alternativa} && T = (a_0, \dots, a_n) &\ \mapsto \ p_T(x_0, \dots, x_n) = \sum_{i=0}^n a_i x_i \\
+    \text{\tiny množica} && M = \{a_0, \dots, a_n\} &\ \mapsto \ p_M(x) = \prod_{i=0}^n (x - a_i) \\
+    \text{\tiny množica terk} && \{ T_0, \dots, T_m \} &\ \mapsto \ p(x,y) = \prod_{i=0}^m (y - p_{T_i}(x)) \\
+    \text{\tiny množica množic} && \{ M_0, \dots, M_m \} &\ \mapsto \ p(x,y) = \prod_{i=0}^m (y - p_{M_i}(x))
+    % \{(a_{00} \dost, a_{0n}), \dots, (a_{m0}, \dots, a_{mn})\} & 1
+\end{align*}
+
+Želimo ugotoviti ali je $A = B$. Skonstruiramo polinoma $p_A$ in $p_B$.
+\begin{koda}
+za $i = 0, \dots, k$
+    $r \leftarrow$ nakljucna vrednost iz $S^n$
+    ce $p_A(r) \neq p_B(r)$:
+        vrni NE
+vrni DA
+\end{koda}
+\[P(\text{DA} | A \neq B) \leq \left(\frac{d}{|S|}\right)^k\]
 
 \subsubsection{Schwartz-Zippelov izrek}
 Naj bo $p \in \mathbb{F}[x_1, \dots, x_n]$ in $\deg(p) = d \geq 0$. Naj bo $S \subseteq \mathbb{F}$ poljubna končna podmnožica. Za naključno izbiro (enakomerno) $r \in S^n$ velja:
@@ -254,7 +272,46 @@ Sl. sprem. $X$ in $Y$ sta nekorelirani, če velja:
 \[ P(|X - E(X)| \geq a \sigma(X)) \leq \frac{1}{a^2}  \quad \forall a > 0\]
 oziroma za $\varepsilon := a \sigma(X)$
 \[ P(|X-E(X)| \geq \varepsilon) \leq \frac{D(X)}{\varepsilon^2}\]
+
+\section{Znani problemi}
+\subsection{Perfect matching}
+Naj bo $G$ graf. Popolno ujemanje je podmnožica povezav $M \subseteq E(G)$, tako da vejla
+\begin{align*}
+    \forall e, f \in M\ :\ e \cap f = \emptyset \quad \text{in} \quad
+    \bigcup_{e \in M} e = V(G)
+\end{align*}
+
+$G$ imam popolno ujemanje $\iff$ $\det(A_G) \neq 0$
+\begin{align*}
+    A_G = [a_{ij}]_{i,j = 1}^n \qquad a_{ij} = \begin{cases}
+        x_ij & \text{če } ij \in E(G), i < j \\
+        -x_ij & \text{če } ij \in E(G), i > j \\
+        0 & \text{sicer}
+    \end{cases}
+\end{align*}
+
+
+\subsection{Min/max prerez (Min/max cut)}
+Naj bo $G$ graf. Prerez je particija $V(G)$ na $U$ in $V(G) \setminus U$ tako da se minimizira/maksimizira število povezav med $U$ in $V(G) \setminus U$.
+
+\begin{koda}
+alg rand_min_cut
+vhod: graf $G$
+$G_0 \leftarrow G$
+$i \leftarrow 0$
+dokler $V(G_i) > 2$:
+    $e \leftarrow$ nakljucna povezava v $G_i$
+    $G_{i+1} \leftarrow G_i \setminus e$  // skrcitev povezave $e$ 
+    $i \leftarrow i + 1$
+${u,v} \leftarrow V(G_{n-2})$ // $n = |V(G)|$
+$U = \{w \in V(G)\ |\ w \text{ je bil skrcen v } u \}$
+vrni $(U, V(G) \setminus U)$
+\end{koda}
+
+Algoritem \texttt{rand\_min\_cut} vrne min. prerez z verjetnostjo $\frac{2}{n(n-1)}$.
+
 \end{multicols}
+
 
 \includepdf[pages={1}]{Porazd.pdf}
 \end{document}
