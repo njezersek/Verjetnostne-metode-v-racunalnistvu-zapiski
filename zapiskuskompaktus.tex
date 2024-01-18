@@ -23,7 +23,7 @@
 
 \frenchspacing % No double spacing between sentences
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{0.04em}
+\setlength{\parskip}{0.3em}
 
 \usepackage{mathtools}
 \usepackage{blkarray, bigstrut} %
@@ -268,7 +268,7 @@ Sl. sprem. $X$ in $Y$ sta nekorelirani, če velja:
 Če je $X$ ne negativna sl. sprem. z mat. up., potem je
 \[P(|X| \geq a) \leq \frac{E(|X|)}{a} \quad \forall a > 0\]
 
-Če je $X$ celoštevilska:
+Če je $X$ celoštevilska (\textit{metoda 1. momenta}):
 \[P(X>0) \leq E(X)\]
 
 \subsection{Neenakost Čebiševa}
@@ -276,6 +276,12 @@ Sl. sprem. $X$ in $Y$ sta nekorelirani, če velja:
 \[ P(|X - E(X)| \geq a \sigma(X)) \leq \frac{1}{a^2}  \quad \forall a > 0\]
 oziroma za $\varepsilon := a \sigma(X)$
 \[ P(|X-E(X)| \geq \varepsilon) \leq \frac{D(X)}{\varepsilon^2}\]
+
+Če je $X$ celoštevilska (\textit{metoda 2. momenta}):
+\begin{gather*}
+P(X>0) = 1-P(X\leq0) \\ 
+P(X\leq0) \leq P(|X-E(X)| \geq E(X)) \leq \frac{D(X)}{E^2(X)}
+\end{gather*}
 
 \section*{Nakjučni grafi}
 \subsection*{Erdős-Rényi model}
@@ -307,6 +313,16 @@ Začnemo z $m$ vozlišči in dodajamo vozlišča. Vsakič, ko dodamo vozlišče 
 
 B.A. model ima \textit{scale-free property} in sicer:
 \[ \text{delež vozlišč stopnje k} = \frac{2m(m+1)}{k(k+1)(k+2)} \approx k^{-3} \]
+
+\section*{Bachmann-Landauove notacije}
+\begin{align*}
+    f(n) \in o(g(n)) \iff & \lim_{n \to \infty} \frac{f(n)}{g(n)} = 0 \\
+    f(n) \in O(g(n)) \iff & \limsup_{n \to \infty} \frac{f(n)}{g(n)} < \infty \\
+    f(n) \in \Theta(g(n)) \iff & f(n) \in O(n) \wedge f(n) \in \Omega(n) \\
+    f(n) \in \Omega(g(n)) \iff & \liminf_{n \to \infty} \frac{f(n)}{g(n)} > 0 \\
+    f(n) \in \omega(g(n)) \iff & \lim_{n \to \infty} \frac{f(n)}{g(n)} = \infty \\
+\end{align*}
+\textit{* Včasih se namesto $\in$ uporablja kar $=$.}
 
 \section*{Markovske verige}
 \begin{align*}
@@ -483,7 +499,6 @@ kjer je vsak člen (\textit{clause}) $C_i$ disjunkcija $k$ spremenljivk ali pa n
     x_{i_j} \\
     \neg x_{i_j}
 \end{cases}\]
-
 
 \includegraphics[page=1, scale=0.99]{Porazd.pdf}
 \end{multicols}
