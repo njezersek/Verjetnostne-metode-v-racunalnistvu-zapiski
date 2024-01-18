@@ -1,4 +1,4 @@
-\documentclass[a3paper,10pt]{extarticle}
+\documentclass[a3paper,8pt]{extarticle}
 % \usepackage[utf8]{inputenc}
 \usepackage[mathletters]{ucs}
 \usepackage[utf8x]{inputenc}
@@ -309,6 +309,87 @@ vrni $(U, V(G) \setminus U)$
 \end{koda}
 
 Algoritem \texttt{rand\_min\_cut} vrne min. prerez z verjetnostjo $\frac{2}{n(n-1)}$.
+
+\section*{Markovske verige}
+\begin{align*}
+    \Omega \quad &\dots \quad \text{mnočica stanj} \\
+    X_t \quad &\dots \quad \text{stanje v času $t$}
+\end{align*}
+
+Markovska veriga je zaporedje slučajnih spremenljivk $X = X_0, X_1, \dots$ za katere velja, da je verjetnost prehoda odvisna le od trenutnega stanja:
+\begin{multline*}
+    P(X_{i+1} = x | X_0 = x_0, X_1 = x_1, \dots, X_i = x_i) = \\
+    = P(X_{i+1} = x | X_i = x_i)
+\end{multline*}
+
+Lahko zahtevamo še, da je verjetnost prehoda neodvisna od časa (\textit{time homogeneous}):
+\[ P(X_i+1 = x | X_i = y) = P(X_1 = x | X_0 = y)\]
+
+Od zdaj naprej se bomo osredotočili na končno množico stanj $\Omega = \{x_1, \dots, x_n\}$. 
+\begin{align*}
+    \mathbf{P} = \begin{bmatrix}
+        p_{ij}
+    \end{bmatrix}_{i,j = 1}^n\quad &\dots \quad \text{prehodna matrika} \\
+    p_{ij} \quad &\dots \quad \text{verjetnost prehoda iz $x_i$ v $x_j$}
+\end{align*}
+
+Porazdelitev stanj v času $t$:
+\[q(t) = \begin{bmatrix}
+    q_1(t) & \dots & q_n(t)
+\end{bmatrix} \quad P(X_t = x_i) = q_i(t) \] 
+
+velja
+\[ q(t) = q(t-1) \mathbf{P} = q(0) \mathbf{P}^t \]
+
+\subsection*{Stacionarna porazdelitev}
+$\pi = \begin{bmatrix} \pi_1 \dots \pi_n \end{bmatrix}$ je stacionarna porazdelitev, če velja 
+\[\pi \mathbf{P} = \pi \qquad \sum_{i} \pi_i = 1 \]
+
+Oznake:
+\begin{itemize}
+    \item $f_{i,j}$ verjetnost da $X_t = x_j$ za nek (dovoj velik) $t$, če je $X_0 = x_i$
+    \item $h_{i,j}$ pričakovano število korakov, da pridemo iz stanja $x_i$ v stanje $x_j$. (\textit{hitting time})
+    \item $N(i, t, q(0))$ pričakovano število obiskov stanja $x_i$ po $t$ korakih, če je začetna porazdelitev $q(0)$.
+\end{itemize}
+
+Markovska veriga je \textit{irreducible} $\iff$ $\forall i, j \ f_{ij} > 0$. Za take verige velja:
+\begin{itemize}
+    \item $\exists$ enoloično določena stacionarna porazdelitev
+    \item $f_{i,i} = 1$ in $h_{i,i} = \frac{1}{\pi_i}$
+    \item $\lim_{t \to \infty} \frac{N(i, t, q(0))}{t} = \pi_i$
+\end{itemize}
+
+Markovska veriga je \textit{aperiodična}, če $\nexists c \in \{2, 3, \dots\}$, ki deli vse dolžine ciklov (v grafu prehodov med stanji). Za take verige velja še:
+\begin{itemize}
+    \item $\lim_{t \to \infty} q(0)P^t = \pi$
+\end{itemize}
+
+
+\subsection*{Markovske verige v grafu}
+$G$ povezan graf. Obravnavamo naključne sprehode kot Markovske verige.
+\[ \mathbf{P} = \begin{bmatrix}
+    p_{uv}
+\end{bmatrix}_{u,v \in V(G)} \quad 
+    p_{uv} = \begin{cases}
+    \frac{1}{\deg(u)} & \text{če } uv \in E(G) \\
+    0 & \text{sicer}
+\end{cases}\]
+
+Velja:
+\begin{gather*}
+    \pi = \begin{bmatrix}
+        \pi_v
+    \end{bmatrix}_{v \in V(G)} \quad
+    \pi_v = \frac{\deg(v)}{2|E(G)|}  \quad
+    h_{v,v} = \frac{1}{\pi_v} \\
+    \forall uv \in E(G)\ :\ h_{u,v} < 2|E(G)|
+\end{gather*}
+Pričakovano število korakov, da obiščemo vsa vozlišča je $4(|V(G)|-1)|E(G)|$.
+
+
+
+
+
 
 \end{multicols}
 
