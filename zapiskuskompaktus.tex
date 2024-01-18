@@ -310,6 +310,37 @@ vrni $(U, V(G) \setminus U)$
 
 Algoritem \texttt{rand\_min\_cut} vrne min. prerez z verjetnostjo $\frac{2}{n(n-1)}$.
 
+\section*{Nakjučni grafi}
+\subsection*{Erdős-Rényi model}
+$G \in G(n, p)$ je nakjučni Erdős-Rényi graf z $n$ vozlišči, za katere velja, da je vsak par povezan z verjetnostjo $p$.
+
+\begin{gather*}
+    E(\text{št. povezav v }G(n, p)) = \binom{n}{2} p \\
+    E(\deg v) = (n-1)p
+\end{gather*}
+
+Pravimo, da ima naključni graf neko lastnost \textit{skoraj gotovo} (\textit{almost surely}), če velja
+\[ \lim_{n \to \infty} P(G \in G(n, p) \text{ ima lastnost} ) = 1\]
+
+Naj bo $p$ odvisen od $n$ in $G \in G(n, p)$. Velja:
+\begin{itemize}
+    \item $np < 1$ $\implies$ $G$ je skoraj gotovo nepovezan z komponentami velikosti $O(\log n)$
+    \item $np = 1$ $\implies$ $G$ ima skoraj gotovo komponento velikosti $n^{\frac{2}{3}}$
+    \item $np = c > 1$ $\implies$ $G$ ima skoraj gotovo veliko komponento velikosti $dn$, kjer je $d \in (0, 1)$
+    \item $np < (1-\varepsilon)\ln n$ $\implies$ $G$ je skoraj gotovo nepovezan z izoliranimi vozlišči.
+    \item $np > (1+\varepsilon)\ln n$ $\implies$ $G$ je skoraj gotovo povezan.
+\end{itemize}
+
+\subsection*{Scale-free property}
+\[\text{delež vozlišč stopnje k} \approx k^{-\gamma}\]
+
+\subsection*{Barabási-Albert model}
+Začnemo z $m$ vozlišči in dodajamo vozlišča. Vsakič, ko dodamo vozlišče $v$ dodamo še povezave do ostalih voozlišč z verjetnostjo:
+\[P(v\sim u) = \frac{\deg u}{\sum_w \deg w}\]
+
+B.A. model ima \textit{scale-free property} in sicer:
+\[ \text{delež vozlišč stopnje k} = \frac{2m(m+1)}{k(k+1)(k+2)} \approx k^{-3} \]
+
 \section*{Markovske verige}
 \begin{align*}
     \Omega \quad &\dots \quad \text{mnočica stanj} \\
