@@ -28,7 +28,6 @@
 \usepackage{mathtools}
 \usepackage{blkarray, bigstrut} %
 
-
 \usepackage{amssymb,amsmath,amsthm,amsfonts}
 \usepackage{multicol,multirow}
 \usepackage{calc}
@@ -273,43 +272,6 @@ Sl. sprem. $X$ in $Y$ sta nekorelirani, če velja:
 oziroma za $\varepsilon := a \sigma(X)$
 \[ P(|X-E(X)| \geq \varepsilon) \leq \frac{D(X)}{\varepsilon^2}\]
 
-\section{Znani problemi}
-\subsection{Perfect matching}
-Naj bo $G$ graf. Popolno ujemanje je podmnožica povezav $M \subseteq E(G)$, tako da vejla
-\begin{align*}
-    \forall e, f \in M\ :\ e \cap f = \emptyset \quad \text{in} \quad
-    \bigcup_{e \in M} e = V(G)
-\end{align*}
-
-$G$ imam popolno ujemanje $\iff$ $\det(A_G) \neq 0$
-\begin{align*}
-    A_G = [a_{ij}]_{i,j = 1}^n \qquad a_{ij} = \begin{cases}
-        x_ij & \text{če } ij \in E(G), i < j \\
-        -x_ij & \text{če } ij \in E(G), i > j \\
-        0 & \text{sicer}
-    \end{cases}
-\end{align*}
-
-
-\subsection{Min/max prerez (Min/max cut)}
-Naj bo $G$ graf. Prerez je particija $V(G)$ na $U$ in $V(G) \setminus U$ tako da se minimizira/maksimizira število povezav med $U$ in $V(G) \setminus U$.
-
-\begin{koda}
-alg rand_min_cut
-vhod: graf $G$
-$G_0 \leftarrow G$
-$i \leftarrow 0$
-dokler $V(G_i) > 2$:
-    $e \leftarrow$ nakljucna povezava v $G_i$
-    $G_{i+1} \leftarrow G_i \setminus e$  // skrcitev povezave $e$ 
-    $i \leftarrow i + 1$
-${u,v} \leftarrow V(G_{n-2})$ // $n = |V(G)|$
-$U = \{w \in V(G)\ |\ w \text{ je bil skrcen v } u \}$
-vrni $(U, V(G) \setminus U)$
-\end{koda}
-
-Algoritem \texttt{rand\_min\_cut} vrne min. prerez z verjetnostjo $\frac{2}{n(n-1)}$.
-
 \section*{Nakjučni grafi}
 \subsection*{Erdős-Rényi model}
 $G \in G(n, p)$ je nakjučni Erdős-Rényi graf z $n$ vozlišči, za katere velja, da je vsak par povezan z verjetnostjo $p$.
@@ -447,8 +409,55 @@ $H$ je $k$-neodvisna $\implies$ $H$ je $(k-1)$-neodvisna
 
 
 
+\section{Znani problemi}
+\subsection{Perfect matching}
+Naj bo $G$ graf. Popolno ujemanje je podmnožica povezav $M \subseteq E(G)$, tako da vejla
+\begin{align*}
+    \forall e, f \in M\ :\ e \cap f = \emptyset \quad \text{in} \quad
+    \bigcup_{e \in M} e = V(G)
+\end{align*}
+
+$G$ imam popolno ujemanje $\iff$ $\det(A_G) \neq 0$
+\begin{align*}
+    A_G = [a_{ij}]_{i,j = 1}^n \qquad a_{ij} = \begin{cases}
+        x_ij & \text{če } ij \in E(G), i < j \\
+        -x_ij & \text{če } ij \in E(G), i > j \\
+        0 & \text{sicer}
+    \end{cases}
+\end{align*}
+
+
+\subsection{Min/max prerez (Min/max cut)}
+Naj bo $G$ graf. Prerez je particija $V(G)$ na $U$ in $V(G) \setminus U$ tako da se minimizira/maksimizira število povezav med $U$ in $V(G) \setminus U$.
+
+\begin{koda}
+alg rand_min_cut
+vhod: graf $G$
+$G_0 \leftarrow G$
+$i \leftarrow 0$
+dokler $V(G_i) > 2$:
+    $e \leftarrow$ nakljucna povezava v $G_i$
+    $G_{i+1} \leftarrow G_i \setminus e$  // skrcitev povezave $e$ 
+    $i \leftarrow i + 1$
+${u,v} \leftarrow V(G_{n-2})$ // $n = |V(G)|$
+$U = \{w \in V(G)\ |\ w \text{ je bil skrcen v } u \}$
+vrni $(U, V(G) \setminus U)$
+\end{koda}
+
+Algoritem \texttt{rand\_min\_cut} vrne min. prerez z verjetnostjo $\frac{2}{n(n-1)}$.
+
+\subsection{$k$-SAT}
+Iščemo rešitev boolove formule oblike:
+\[ F(\underbar{x}) = C_1(\underbar{x}) \wedge \dots \wedge C_m(\underbar{x}) \]
+kjer je vsak člen (\textit{clause}) $C_i$ disjunkcija $k$ spremenljivk ali pa njihovih negacij:
+\[ C_i = C_1^i \vee \dots \vee C_k^i \qquad C_j^i = \begin{cases}
+    x_{i_j} \\
+    \neg x_{i_j}
+\end{cases}\]
+
+
+\includegraphics[page=1, scale=0.99]{Porazd.pdf}
 \end{multicols}
 
 
-\includepdf[pages={1}]{Porazd.pdf}
 \end{document}
