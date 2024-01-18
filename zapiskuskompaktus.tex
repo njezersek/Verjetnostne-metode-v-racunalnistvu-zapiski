@@ -23,7 +23,7 @@
 
 \frenchspacing % No double spacing between sentences
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{0.1em}
+\setlength{\parskip}{0.04em}
 
 \usepackage{mathtools}
 \usepackage{blkarray, bigstrut} %
@@ -117,6 +117,8 @@
 \[\binom{n}{k} = \frac{n^{\underline{k}}}{k!} = \frac{n!}{k!(n-k)!} = \binom{n}{n-k}\]
 
 \[P(A|B) = \frac{P(A\cap B)}{P(B)} \qquad P(A|B) = \frac{P(B|A)P(A)}{P(B)}\]
+
+\[ \lim_{n \to \infty} \left(1 - \frac{x}{n}\right)^n = e^x \]
 
 \subsubsection{Izbori}
 Imamo $n$ oštevilčenih kroglic. Na koliko načinov lahko izberemo $k$ kroglic?
@@ -266,6 +268,9 @@ Sl. sprem. $X$ in $Y$ sta nekorelirani, če velja:
 Če je $X$ ne negativna sl. sprem. z mat. up., potem je
 \[P(|X| \geq a) \leq \frac{E(|X|)}{a} \quad \forall a > 0\]
 
+Če je $X$ celoštevilska:
+\[P(X>0) \leq E(X)\]
+
 \subsection{Neenakost Čebiševa}
 Če ima $X$ disperzijo, je
 \[ P(|X - E(X)| \geq a \sigma(X)) \leq \frac{1}{a^2}  \quad \forall a > 0\]
@@ -359,7 +364,7 @@ Markovska veriga je \textit{aperiodična}, če $\nexists c \in \{2, 3, \dots\}$,
 
 
 \subsection*{Markovske verige v grafu}
-$G$ povezan graf. Obravnavamo naključne sprehode kot Markovske verige.
+$G$ povezan nusmerjen graf. Obravnavamo naključne sprehode kot Markovske verige.
 \[ \mathbf{P} = \begin{bmatrix}
     p_{uv}
 \end{bmatrix}_{u,v \in V(G)} \quad 
@@ -378,6 +383,30 @@ Velja:
     \forall uv \in E(G)\ :\ h_{u,v} < 2|E(G)|
 \end{gather*}
 Pričakovano število korakov, da obiščemo vsa vozlišča je $4(|V(G)|-1)|E(G)|$.
+
+Posebna primera $K_n$: $O(n \log n)$ in $P_n$: $O(n^2)$.  
+
+\subsection*{Markovske verige v usmerjenem grafu}
+$G$ povezan usmerjen graf v katerem velja $\deg^+(v) = \deg^-(v)$ za vsa vozlišča $v$. Vsaka povezava $uv$ ima utež $w_{uv}$.
+
+\[ \mathbf{P} = \begin{bmatrix}
+    p_{uv}
+\end{bmatrix}_{u,v \in V(G)} \quad 
+    p_{uv} = \begin{cases}
+    \frac{w_{uv}}{\deg^+(u)} & \text{če } uv \in E(G) \\
+    0 & \text{sicer}
+\end{cases} \]
+
+Velja:
+\begin{gather*}
+    \pi = \begin{bmatrix}
+        \pi_v
+    \end{bmatrix}_{v \in V(G)} \quad
+    \pi_v = \frac{\deg^+(v)}{|E(G)|}  \quad
+    h_{v,v} = \frac{1}{\pi_v}
+\end{gather*}
+
+\textit{* $|E|$ in $\deg^+(v)$ sta ozniki za vsoti uteži in ne števila povezav.}
 
 \section*{Linearno programiranje}
 Linearni program dimenzije $d$ z $n$ pogoji je problem oblike:
