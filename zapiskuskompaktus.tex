@@ -417,8 +417,33 @@ Velja:
 \end{gather*}
 Pričakovano število korakov, da obiščemo vsa vozlišča je $4(|V(G)|-1)|E(G)|$.
 
+\section*{Linearno programiranje}
+Linearni program dimenzije $d$ z $n$ pogoji je problem oblike:
+\begin{align*}
+    \text{max}\quad & f(x_1, \dots, x_d) = c_1 x_1 + \dots + c_d x_d \\
+    \text{p.p.} \quad & a_{11} x_1 + \dots + a_{1d} x_d \leq b_1 \\
+         & \quad \vdots  \\
+        & a_{n1} x_1 + \dots + a_{nd} x_d \leq b_n 
+\end{align*}
+
+Linearne programe lahko rešimo z \textit{Seideloviim algoritmom} v pričakovanem času $O(d!\, n)$ (uporabno za majhne konstantne dimenzije).
 
 
+\section*{Zgoščevalne funkcije (\textit{hashing})}
+Imamo univerzalno množico $\mathcal{U}$ velikosti $|\mathcal{U}| = u$ in množico $M$ velikosti $m$. 
+
+\textit{Družina zgoščevalnih funkcij}
+\[ H \subseteq \{h: \mathcal{U} \to M \}\]
+
+$H$ je \textit{univerzalna} $\iff$ $\forall x, y \in \mathcal{U}, x \neq y$ velja
+\[ \mathop{P}\limits_{h\in H} (h(x) = h(y)) \leq \frac{1}{m} \]
+
+$H$ je $k$-neodvisna $\iff$ $\forall \text{ paroma različne } x_1, \dots, x_k \in \mathcal{U}$ in $\forall t_1, \dots, t_k \in M$ velja:
+\[ \mathop{P}\limits_{h\in H} P(h(x_1) = t_1 \wedge \dots \wedge h(x_k) = t_k) \leq \frac{1}{m^k}\]
+
+\textit{* $h$ je v tem primeru naključna funkcija iz $H$}
+
+$H$ je $k$-neodvisna $\implies$ $H$ je $(k-1)$-neodvisna
 
 
 
